@@ -112,8 +112,8 @@
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # disable the firewall
-  networking.firewall.enable = false;
+  # enable the firewall
+  networking.firewall.enable = true;
 
   # Original NixOS version
   system.stateVersion = "26.05";
