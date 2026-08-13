@@ -86,5 +86,6 @@ in
     ncspot
     playerctl
     git-credential-manager
+    discord
   ];
 }
