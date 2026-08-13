@@ -5,7 +5,7 @@ from libqtile.utils import guess_terminal
 import os
 import subprocess
 
-
+os.environ["XDG_CURRENT_DESKTOP"] = "qtile"
 mod = "mod4"
 terminal = "alacritty"
 
