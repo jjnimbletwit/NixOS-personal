@@ -20,9 +20,15 @@
   nixpkgs.config.allowUnfreePredicate = _: true;
 
   # enable XDG (dependecy for certain features)
-  xdg.portal.enable = true;
-  xdg.portal.config.common.default = "*";
-
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config.common.default = [ "wlr" "gtk" ];
+  };
   # allow flatpak packages to be installed
   services.flatpak.enable = true;
 
