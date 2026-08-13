@@ -47,10 +47,15 @@ in
     enable = true;
     settings = {
       user = {
-        name = "Jasper Mackain";
+        name = "Jasper M-B";
         email = "jaspermackain@gmail.com";
       };
       init.defaultBranch = "main";
+    };
+    settings.credential = {
+      helper = "manager";
+      "https://github.com".username = "jjnimbletwit";
+      credentialStore = "cache";
     };
   };
 
@@ -80,5 +85,6 @@ in
     heroic
     ncspot
     playerctl
+    git-credential-manager
   ];
 }
