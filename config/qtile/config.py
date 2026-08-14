@@ -300,3 +300,16 @@ wl_xcursor_theme = "breeze_cursors"
 wl_xcursor_size = 24
 
 wmname = "LG3D"
+
+subprocess.run([
+    "systemctl", "--user", "import-environment",
+    "WAYLAND_DISPLAY",
+    "XDG_CURRENT_DESKTOP",
+])
+
+subprocess.run([
+    "dbus-update-activation-environment",
+    "--systemd",
+    "WAYLAND_DISPLAY",
+    "XDG_CURRENT_DESKTOP",
+])

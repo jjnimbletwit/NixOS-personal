@@ -9,6 +9,14 @@
   # enable NTFS for games drive
   boot.supportedFilesystems = [ "ntfs" ];
 
+  # pipewire
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   # mount the games drive
   fileSystems."/mnt/games" = {
     device = "/dev/disk/by-uuid/261E431A1E42E303";
@@ -22,12 +30,18 @@
   # enable XDG (dependecy for certain features)
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gtk
+    wlr = {
+      enable = true;
+      settings.screencast = {
+        max_fps = 30;
+        chooser_type = "simple";
+      };
+    };
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
     ];
-    config.common.default = [ "wlr" "gtk" ];
+    config.common.default = "wlr";
   };
   # allow flatpak packages to be installed
   services.flatpak.enable = true;

@@ -87,5 +87,6 @@ in
     playerctl
     git-credential-manager
     discord
+    vesktop
   ];
 }
