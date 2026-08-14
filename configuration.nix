@@ -43,6 +43,7 @@
     ];
     config.common.default = "wlr";
   };
+
   # allow flatpak packages to be installed
   services.flatpak.enable = true;
 

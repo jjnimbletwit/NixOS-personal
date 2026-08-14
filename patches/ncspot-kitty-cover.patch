@@ -1,0 +1,120 @@
+--- a/src/ui/cover.rs
++++ b/src/ui/cover.rs
+@@ -1,7 +1,6 @@
+ use std::collections::HashSet;
+-use std::io::Write;
+ use std::path::PathBuf;
+-use std::process::{Child, Stdio};
++use std::process::Command as ProcessCommand;
+ 
+ use std::sync::{Arc, RwLock};
+ 
+@@ -25,7 +24,6 @@
+     loading: Arc<RwLock<HashSet<String>>>,
+     last_size: RwLock<Vec2>,
+     drawn_url: RwLock<Option<String>>,
+-    ueberzug: RwLock<Option<Child>>,
+     font_size: Vec2,
+ }
+ 
+@@ -52,7 +50,6 @@
+         Self {
+             queue,
+             library,
+-            ueberzug: RwLock::new(None),
+             loading: Arc::new(RwLock::new(HashSet::new())),
+             last_size: RwLock::new(Vec2::new(0, 0)),
+             drawn_url: RwLock::new(None),
+@@ -114,17 +111,40 @@
+         draw_offset.x += (draw_size.x - size.x) / 2;
+         draw_offset.y += (draw_size.y - size.y) - (draw_size.y - size.y) / 2;
+ 
+-        let cmd = format!(
+-            "{{\"action\":\"add\",\"scaler\":\"fit_contain\",\"identifier\":\"cover\",\"x\":{},\"y\":{},\"width\":{},\"height\":{},\"path\":\"{}\"}}\n",
+-            draw_offset.x,
+-            draw_offset.y,
++        let place = format!(
++            "{}x{}@{}x{}",
+             size.x,
+             size.y,
+-            path.to_str().unwrap()
+-        );
+-
+-        if let Err(e) = self.run_ueberzug_cmd(&cmd) {
+-            error!("Failed to run Ueberzug: {e}");
++            draw_offset.x,
++            draw_offset.y
++        );
++
++        let window_size = format!(
++            "{},{},{},{}",
++            draw_size.x,
++            draw_size.y,
++            draw_size.x * self.font_size.x,
++            draw_size.y * self.font_size.y
++        );
++
++        if let Err(e) = ProcessCommand::new("@KITTY@")
++            .args([
++                "+kitten",
++                "icat",
++                "--silent",
++                "--stdin=no",
++                "--transfer-mode=stream",
++                "--use-window-size",
++                &window_size,
++                "--place",
++                &place,
++                "--image-id",
++                "1",
++                path.to_str().unwrap(),
++            ])
++            .status()
++        {
++            error!("Failed to run kitty icat: {e}");
+             return;
+         }
+ 
+@@ -139,29 +159,19 @@
+         let mut drawn_url = self.drawn_url.write().unwrap();
+         *drawn_url = None;
+ 
+-        let cmd = "{\"action\": \"remove\", \"identifier\": \"cover\"}\n";
+-        if let Err(e) = self.run_ueberzug_cmd(cmd) {
+-            error!("Failed to run Ueberzug: {e}");
+-        }
+-    }
+-
+-    fn run_ueberzug_cmd(&self, cmd: &str) -> Result<(), std::io::Error> {
+-        let mut ueberzug = self.ueberzug.write().unwrap();
+-
+-        if ueberzug.is_none() {
+-            *ueberzug = Some(
+-                std::process::Command::new("ueberzug")
+-                    .args(["layer", "--silent"])
+-                    .stdin(Stdio::piped())
+-                    .stdout(Stdio::piped())
+-                    .spawn()?,
+-            );
+-        }
+-
+-        let stdin = (*ueberzug).as_mut().unwrap().stdin.as_mut().unwrap();
+-        stdin.write_all(cmd.as_bytes())?;
+-
+-        Ok(())
++        if let Err(e) = ProcessCommand::new("@KITTY@")
++            .args([
++                "+kitten",
++                "icat",
++                "--silent",
++                "--stdin=no",
++                "--transfer-mode=stream",
++                "--clear",
++            ])
++            .status()
++        {
++            error!("Failed to clear kitty image: {e}");
++        }
+     }
+ 
+     fn cache_path(&self, url: String) -> Option<PathBuf> {

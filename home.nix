@@ -8,6 +8,7 @@ let
       qtile = "qtile";
       alacritty = "alacritty";
       rofi = "rofi";
+      kitty = "kitty";
     };
 in
 
@@ -59,6 +60,23 @@ in
     };
   };
 
+  # setup music
+  programs.ncspot = {
+    enable = true;
+    package = (pkgs.ncspot.override {
+      withCover = true;
+      withMPRIS = true;
+    }).overrideAttrs (old: {
+      patches = (old.patches or []) ++ [
+        ./patches/ncspot-kitty-cover.patch
+      ];
+      postPatch = ''
+        substituteInPlace src/ui/cover.rs \
+          --replace-fail '@KITTY@' '${pkgs.kitty}/bin/kitty'
+        '';
+    });
+  };
+
   # install user packages
   home.packages = with pkgs; [
     neovim
@@ -83,10 +101,10 @@ in
     nautilus
     qview
     heroic
-    ncspot
     playerctl
     git-credential-manager
     discord
     vesktop
+    kitty
   ];
 }

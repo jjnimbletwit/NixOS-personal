@@ -7,9 +7,9 @@ import subprocess
 
 os.environ["XDG_CURRENT_DESKTOP"] = "qtile"
 mod = "mod4"
-terminal = "alacritty"
+terminal = "kitty"
 
-myTerm = "alacritty"
+myTerm = "kitty"
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
