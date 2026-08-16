@@ -6,7 +6,6 @@ let
     configs = {
       nvim = "nvim";
       qtile = "qtile";
-      alacritty = "alacritty";
       rofi = "rofi";
       kitty = "kitty";
     };
@@ -85,7 +84,6 @@ in
     nixpkgs-fmt
     nodejs
     gcc
-    alacritty
     rofi
     fastfetch
     git
