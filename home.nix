@@ -62,6 +62,11 @@ in
   # setup music
   programs.ncspot = {
     enable = true;
+    settings = {
+      client_id = "0fbf0b7154cd4bd6ac7e71f4a020a526";
+      client_secret = "3b1f4a493d7a41c69307bf0eb2f45dc3";
+      username = "04j8kuu95q8s8h2f6943cyev7";
+    };
     package = (pkgs.ncspot.override {
       withCover = true;
       withMPRIS = true;
