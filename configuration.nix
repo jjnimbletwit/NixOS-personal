@@ -20,7 +20,7 @@
   # mount the games drive
   fileSystems."/mnt/games" = {
     device = "/dev/disk/by-uuid/261E431A1E42E303";
-    fsType = "ntfs3";
+    fsType = "ntfs";
     options = [ "rw" "uid=1000" "nofail" ];
   };
 

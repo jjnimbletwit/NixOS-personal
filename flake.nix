@@ -1,7 +1,7 @@
 {
 	description = "NixOS from Scratch";
 	inputs = {
-		nixpks.url = "nixpkgs/nixos-25.05";
+		nixpks.url = "nixpkgs/nixos-unstable";
 		nix-flatpak.url = "github:gmodena/nix-flatpak";
 		home-manager = {
 			url = "github:nix-community/home-manager";
