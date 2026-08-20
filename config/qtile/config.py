@@ -2,6 +2,7 @@ from libqtile import bar, extension, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile.backend.wayland import InputConfig
 import os
 import subprocess
 
@@ -291,7 +292,9 @@ reconfigure_screens = True
 auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
-wl_input_rules = None
+wl_input_rules = {
+    "*": InputConfig(accel_profile='flat', pointer_accel=0),
+}
 
 # xcursor theme (string or None) and size (integer) for Wayland backend
 os.environ["XCURSOR_THEME"] = "breeze_cursors"
