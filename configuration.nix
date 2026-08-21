@@ -110,6 +110,7 @@
     kdePackages.breeze-icons
     firefox
     hyprpaper
+    prismlauncher
   ];
 
   # fonts for final system

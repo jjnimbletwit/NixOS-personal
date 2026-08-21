@@ -113,7 +113,6 @@ in
     lutris
     protonup-qt
     overskride
-    prismlauncher
     grim
     slurp
     wl-clipboard
