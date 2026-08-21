@@ -109,7 +109,6 @@
     kdePackages.breeze
     kdePackages.breeze-icons
     firefox
-    waybar
     hyprpaper
   ];
 

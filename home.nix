@@ -122,7 +122,6 @@ in
     heroic
     playerctl
     git-credential-manager
-    discord
     vesktop
     kitty
     killall

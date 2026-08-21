@@ -1,7 +1,6 @@
 * {
     border: none;
     border-radius: 0;
-    min-height: 0;
     font-family: "JetBrainsMono Nerd Font Propo";
     font-weight: bold;
     font-size: 16px;
@@ -18,12 +17,12 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 6px;
     margin: 0;
     color: #444b6a;
     background: transparent;
     border: none;
-    border-bottom: 3px solid transparent
+    border-bottom: 3px solid transparent;
 }
 
 #workspaces button:not(.empty) {
