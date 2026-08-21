@@ -64,15 +64,37 @@ in
   # setup music
   programs.ncspot = {
     enable = true;
-    settings = {
-      client_id = "0fbf0b7154cd4bd6ac7e71f4a020a526";
-      client_secret = "3b1f4a493d7a41c69307bf0eb2f45dc3";
-      username = "04j8kuu95q8s8h2f6943cyev7";
-    };
     package = (pkgs.ncspot.override {
       withCover = true;
       withMPRIS = true;
+    }).overrideAttrs (old: {
+      patches = (old.patches or []) ++ [
+        ./patches/ncspot-kitty-cover.patch
+      ];
+      postPatch = ''
+        substituteInPlace src/ui/cover.rs \
+          --replace-fail '@KITTY@' '${pkgs.kitty}/bin/kitty'
+      '';
     });
+  };
+
+  # configure GTK
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+  };
+
+  # gnome apps dark theme (file manager)
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
   };
 
   # install user packages
@@ -103,5 +125,6 @@ in
     discord
     vesktop
     kitty
+    killall
   ];
 }
