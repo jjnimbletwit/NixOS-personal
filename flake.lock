@@ -7,15 +7,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1784588016,
-        "narHash": "sha256-ouZe80aWEhMLVMkqICFDN+JUw+0FJtCr/bh+hHtRtMg=",
+        "lastModified": 1787146702,
+        "narHash": "sha256-YbRcLdU/yK4gWsQg7V8WTKZHfXL33g8+wSFUX3wyevs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "deeb6b7eb7e0c44ae1819c051ce175bd92a85100",
+        "rev": "173b7e8d40fdc8c296a9c99854314f17a3a1704c",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
+        "ref": "release-26.05",
         "repo": "home-manager",
         "type": "github"
       }
@@ -37,28 +38,15 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1784555310,
-        "narHash": "sha256-x8Suc10wDlysPVmLWoyifgL7p2wDoQbqRXU5r+qiTgo=",
-        "rev": "421eebfd0ec7bccd4abe826ce62d7e6e83129493",
+        "lastModified": 1787101114,
+        "narHash": "sha256-BA7sSNjLDuPGSOYBGpr6WQjke1MQ8AZpJ8GlYZM/mOc=",
+        "rev": "b18a4b905f8d028dc4476412e6d6891728695379",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1038038.421eebfd0ec7/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.8045.b18a4b905f8d/nixexprs.tar.xz"
       },
       "original": {
         "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nixpks": {
-      "locked": {
-        "lastModified": 1787135253,
-        "narHash": "sha256-M5/r2v++FjVhdsxXYMb4BDJ5YLAdCWFt3aZotcshocA=",
-        "rev": "ffb3c9b700e759be2ef13237c9d8f953b32a1e46",
-        "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1058091.ffb3c9b700e7/nixexprs.tar.xz"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-unstable",
+        "ref": "nixos-26.05",
         "type": "indirect"
       }
     },
@@ -66,8 +54,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "nix-flatpak": "nix-flatpak",
-        "nixpkgs": "nixpkgs",
-        "nixpks": "nixpks"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

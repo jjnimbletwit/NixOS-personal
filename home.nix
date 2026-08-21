@@ -8,6 +8,8 @@ let
       qtile = "qtile";
       rofi = "rofi";
       kitty = "kitty";
+      hypr = "hypr";
+      waybar = "waybar";
     };
 in
 
@@ -70,14 +72,6 @@ in
     package = (pkgs.ncspot.override {
       withCover = true;
       withMPRIS = true;
-    }).overrideAttrs (old: {
-      patches = (old.patches or []) ++ [
-        ./patches/ncspot-kitty-cover.patch
-      ];
-      postPatch = ''
-        substituteInPlace src/ui/cover.rs \
-          --replace-fail '@KITTY@' '${pkgs.kitty}/bin/kitty'
-        '';
     });
   };
 

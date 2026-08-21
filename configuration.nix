@@ -30,18 +30,7 @@
   # enable XDG (dependecy for certain features)
   xdg.portal = {
     enable = true;
-    wlr = {
-      enable = true;
-      settings.screencast = {
-        max_fps = 30;
-        chooser_type = "simple";
-      };
-    };
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal-gtk
-    ];
-    config.common.default = "wlr";
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   # allow flatpak packages to be installed
@@ -70,13 +59,10 @@
   # Set your time zone.
   time.timeZone = "Europe/London";
 
-
   # setup desktop environment
-  services.xserver = {
-  	enable = true;
-	autoRepeatDelay = 200;
-	autoRepeatInterval = 35;
-	windowManager.qtile.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
   };
   services.displayManager.ly.enable = true;
 
@@ -123,6 +109,8 @@
     kdePackages.breeze
     kdePackages.breeze-icons
     firefox
+    waybar
+    hyprpaper
   ];
 
   # fonts for final system

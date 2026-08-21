@@ -1,0 +1,95 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "custom/separator",
+        "hyprland/window"
+    ],
+
+    "modules-right": [
+        "custom/kernel",
+        "custom/separator",
+        "cpu",
+        "custom/separator",
+        "memory",
+        "custom/separator",
+        "disk",
+        "custom/separator",
+        "clock",
+    ],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "default": ""
+        },
+        "persistent-workspaces": {
+            "*": 9
+        },
+        "on-click": "activate"
+    },
+
+    "custom/separator": {
+        "format": "|",
+        "tooltip": false
+    },
+
+    "hyprland/submap": {
+        "format": "{}",
+        "tooltip": false
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 40,
+        "separate-outputs": true
+    },
+
+    "custom/kernel": {
+        "exec": "uname -r",
+        "interval": 300,
+        "format": "{}",
+        "tooltip": false
+    },
+
+    "cpu": {
+        "interval": 2,
+        "format": "CPU: {usage}%",
+        "on-click": "kitty -e btop"
+    },
+
+    "memory": {
+        "interval": 2,
+        "format": "Mem: {used:0.0f}G",
+        "on-click": "kitty -e btop"
+    },
+
+    "disk": {
+        "interval": 60,
+        "path": "/",
+        "format": "Disk: {free} free",
+        "on-click": "notify-disk"
+    },
+
+    "clock": {
+        "interval": 60,
+        "format": "{:%a, %b %d - %H:%M}",
+        "on-click": "notify-date"
+    },
+
+    "tray": {
+        "spacing": 6
+    }
+}
