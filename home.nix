@@ -1,6 +1,21 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ncspot-src, ... }:
 
 let
+    # build ncspot from github source
+    ncspot = pkgs.ncspot.overrideAttrs (old: {
+      src = ncspot-src;
+      version = "1.4.0";
+      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+        src = ncspot-src;
+        hash = "sha256-4RRAFThnp06QFb3U4IjRTRc3B9muyajH592ZNWJrJZY=";
+      };
+      buildFeatures = old.buildFeatures ++ [ "cover" ];
+      cargoBuildFeatures = old.cargoBuildFeatures ++ [ "cover" ];
+      cargoCheckFeatures = old.cargoBuildFeatures ++ [ "cover" ];
+    });
+
+
+    # setup dotfiles
     dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
     create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
     configs = {
@@ -64,18 +79,7 @@ in
   # setup music
   programs.ncspot = {
     enable = true;
-    package = (pkgs.ncspot.override {
-      withCover = true;
-      withMPRIS = true;
-    }).overrideAttrs (old: {
-      patches = (old.patches or []) ++ [
-        ./patches/ncspot-kitty-cover.patch
-      ];
-      postPatch = ''
-        substituteInPlace src/ui/cover.rs \
-          --replace-fail '@KITTY@' '${pkgs.kitty}/bin/kitty'
-      '';
-    });
+    package = ncspot;
   };
 
   # configure GTK
