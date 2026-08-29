@@ -4,6 +4,8 @@
     "height": 30,
 
     "modules-left": [
+        "custom/power",
+        "custom/separator",
         "hyprland/workspaces",
         "custom/separator",
         "hyprland/window"
@@ -39,6 +41,12 @@
             "*": 9
         },
         "on-click": "activate"
+    },
+
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "poweroff",
+        "tooltip": false
     },
 
     "custom/separator": {
