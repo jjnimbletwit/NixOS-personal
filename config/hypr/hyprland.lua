@@ -67,9 +67,9 @@ hl.env("HYPRCURSOR_SIZE", "24")
 --   },
 -- })
 
--- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
--- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
--- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
+hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
+hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
+hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
 
 
 -----------------------
@@ -272,7 +272,7 @@ for i = 1, 10 do
 end
 
 -- Take a screenshot
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("sh -c 'slurp | grim -g - - | wl-copy'"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd([[grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(date +%F_%H:%M:%S).png]]))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
