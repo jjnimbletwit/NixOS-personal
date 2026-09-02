@@ -128,5 +128,6 @@ in
     vesktop
     kitty
     killall
+    rofimoji
   ];
 }
