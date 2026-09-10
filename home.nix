@@ -129,5 +129,6 @@ in
     kitty
     killall
     rofimoji
+    parsec-bin
   ];
 }
