@@ -52,6 +52,13 @@
   };
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  # setup VR connection
+  services.wivrn = {
+    enable = true;
+    openFirewall = true;
+    autoStart = true;
+  };
+
   # setup internet and local networking
   networking.hostName = "nixos-btw"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -137,6 +144,9 @@
     powerOnBoot = true;
     settings.General.AutoConnect = true;
     settings.General.Enable = "Source,Sink,Media,Socket";
+  };
+  systemd.services.bluetooth = {
+    wantedBy = [ "multi-user.target" ];
   };
 
   # install flatpak packages
